@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .login-content{
+        width: 360px;
+        margin: 0 auto;
+        border: 1px solid cyan;
+        border-radius: 6px;
+        text-align: center;
+    }
+    .item{
+        margin-top: 40px;
+        position: relative;
+    }
+    .item label{
+        display: inline-block;
+width: 68px;
+text-align: right;
+    }
+    .item input{
+        border-bottom: 1px solid black;
+        border-right: 1px solid transparent;
+        border-left: 1px solid transparent;
+        border-top: 1px solid transparent;
+outline: none;
+        color: green;
+    }
+    .btn{
+        width: 100px;
+        height: 40px;
+        background-color: cyan ;
+        border-radius: 6px;
+        /* border:none; */
+        outline: none;
+        color: white;
+        cursor: pointer;
+        margin-bottom: 50px;
+
+    }
+    .error{
+        color:red;
+        position: absolute;
+        bottom: -21px;
+        left:132px;
+    }
+   
+</style>
+</head>
+<body>
+    <div class="" id="app">
+<div class="login-content">
+    <h1>欢迎登陆</h1>
+
+    <div class="item">
+           <label for="">手机号:</label>
+    <input type="text" v-model="phone" v-on:blur="checkphone" autofocus>
+    <span class="error">{{phoneerr}}</span>
+    </div>
+    <div class="item">
+          <label for=""> 密码:</label>
+    <input type="password" v-model="pwd" v-on:blur="checkpwd">
+    <span class="error">{{pwderr}}</span>
+    </div>
+ 
+    <div class="item">
+            <button class="btn" @click="login">登陆</button>
+    </div>
+  
+
+
+</div>
+    </div>
+
+
+
+    <script src="js\vue (1).js"></script>
+    <script>
+        let vm= new Vue({
+            el:'#app',
+            data: {
+phone:'',
+pwd:'',
+phoneerr:' ',
+pwderr:' ',
+a:true
+
+            },
+            methods: {
+                login() {
+                      if(this.pwderr=='' && this.phoneerr ==''){
+
+                        let userarr=[];
+                        if (localStorage.getItem('userinfo')) {
+                            userarr = JSON.parse(localStorage.getItem('userinfo'));
+
+                        } else {
+                            // 是null的情况下不能null值进去
+                            userarr = []
+                        }
+                        //   循环遍历每一项的内容item，以及内容item的下标index
+                        userarr.forEach((item,index) => {
+                            console.log(item,index)
+                            if(true){
+                                if(item.phone ==this.phone && item.pwd ==this.pwd){
+                                    location.href='http://wwww.baidu.com';
+                                   this.a=false;
+//用一个全局变量a来表示上面的执行状态，这样可以杜绝foreach的控制性弱带来的两种分叉导向共同执行bug---但这样又带来新的bug--
+// 即第一次就错误，程序没反应，两种导向都没有执行---处理策略构想-也许可以在更高的维度监听这两个的执行状态，进行程序反馈
+                                }else if(!this.a){
+                                    this.pwderr="手机号或密码不匹配"
+                                }
+
+                            }else{
+                                this.phoneerr='改手机号没注册';
+                            }
+                        });
+                
+
+
+
+
+
+
+
+                 
+                  }
+
+                },
+                checkphone() {
+// 检查手机号格式
+if(!((/^1\d{10}$/.test(this.phone)))){
+    this.phoneerr="手机号格式有误";
+}else{
+    this.phoneerr='';
+}
+
+
+
+                },
+                checkpwd() {
+// 检查密码格式
+if(this.pwd ==''){
+this.pwderr ='请输入密码';
+}else if(this.pwd.length<6){this.pwderr='密码格式有误';
+}else{    this.pwderr='';}
+
+                }
+            },
+        })
+
+      
+    </script>
+</body>
+</html>

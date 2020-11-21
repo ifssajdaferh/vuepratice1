@@ -1,0 +1,153 @@
+<style type="text/css">
+
+    .change{
+    
+    width: 100px;
+    
+    height: 100px;
+    
+    background-color: red;
+    
+    text-align: center;
+    
+    line-height: 100px;
+    
+    font-size: 40px;
+    
+    color: white;
+    position: absolute;
+    top:0;
+    right: 0;
+    
+    }
+    
+    .changs{
+    
+    width: 200px;
+    
+    height: 200px;
+    
+    background-color: blue;
+    
+    text-align: center;
+    
+    line-height: 150px;
+    
+    font-size: 40px;
+    
+    color: white;
+    position: absolute;
+    top:0;
+    right: 0
+    
+    }
+    .btn1{
+         background-color: green;
+         outline: none;
+         position: absolute;
+         width: 120px;
+         height: 70px;
+         top: 220px;
+         right: 30px;
+         font-size: 20px;
+    }
+    .d1{
+    width: 2000px;
+    height: 300px;
+    border: 1px solid black;
+    background-color: cyan;
+}
+.d1 :nth-child(1){
+    list-style:square;
+
+}
+    
+    </style>
+    
+    <body>
+    
+            <div id="demo">
+    
+            <ones :class='[styles]'></ones>
+    
+            <button v-on:click='doIt' class="btn1">点击</button>
+    
+            <pre>
+                一：   1.、数据驱动：
+                  在vue中，数据的改变会驱动视图的自动更新。传统的做法是需要手动改变DOM来使得视图更新，而vue只需要改变数据。
+                  2、组件
+                  组件化开发，优点很多，可以很好的降低数据之间的耦合度。将常用的代码封装成组件之后（vue组件封装方法），就能高度的复用，提高代码的可重用性。一个页面/模块可以由多个组件所组成。
+              
+                二：v-if块在切换当中合适地销毁与重建条件块内的事件监听器和子组件。 v-if 是惰性的，如果为false，则什么也不错-不编译，不渲染。 当第一次条件为真时，才开始编译。
+                       v-if的由于复用初始成本低，但切换实打实的再渲染，在页面需要经常切换的环境 切换成本很高
+                      v-show：第一次渲染 没有复用概念，所以初始成本相对很高 。但是二次渲染 只是相当于更改了“display”css值，这样做切换成本相对说就很低
+                      所以这两个的好处坏处 视页面环境而定  -需要经常去切换使用v-show，反之只需要一次页面渲染使用v-if
+                 
+                三： .stop .once .prevent .capture .self .enter .esc .space 
+                 
+                      四：可以 一个事件绑定多个函数，按顺序执行
+                               <!-- <button @click="a(),b()">点我ab</button>
+                                <button @click="one()">点我onetwothree</button> -->
+                       第二种就是v-on修饰符 .stop .prevent .capture .self 以及指定按键.{keyCode|keyAlias} 
+                五：  key具有唯一性  key的作用主要是为了高效的更新虚拟DOM。另外vue中在使用相同标签名元素的过渡切换时，也会使用到key属性，其目的也是为了让vue可以区分它们，否则vue只会替换其内部属性而不会触发过渡效果。
+       
+                    
+      
+              </pre>
+                        
+      
+              <div class="d1">
+                    <ul>
+                        <li v-for="x in num"><span v-for="y in x">{{x}}*{{y}}={{x*y}}</span></li>
+                    </ul>
+              </div>
+            </div>
+    
+            <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+
+        let c =document.getElementsByClassName("btn1")[0];
+        console.log(c);
+           c.innerHTML="这是第七道题";
+             var one={
+    
+              template:'<div>777</div>'
+    
+             };
+    
+            let vm= new Vue({
+    
+              el:'#demo',
+    
+              data:{
+    
+              isTrue:true,
+    
+              styles:'change',
+              num:9
+    
+              },
+    
+                components:{
+    
+                'ones':one
+    
+                },
+    
+                methods:{
+    
+                doIt:function(){
+    
+                this.styles='changs'
+    
+                }
+    
+                }
+    
+             })
+    
+    </script>
+    
+    </body>
+    
+    

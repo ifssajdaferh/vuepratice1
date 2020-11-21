@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="d5">
+<h1 v-html="msg"></h1>
+<p>{{murder.length}}</p>
+<p>dawdawid{{murder[2]}}</p>
+<p>{{murderinfu.name}}</p>
+<p>{{murderinfu.job}}</p>
+<p>{{murderinfu.is? "我是真的":"我是假的"+"decided with is"}}</p>
+<input type="text" v-model="msg">
+<a href="http://www.tencent.com">点我</a>
+<p id="p1">{{time}}</p>
+<hr style="border:1px solid cyan">
+
+<!-- v-once只渲染初始化的一次，随后切断vm的绑定 -->
+<p v-once>{{info}}</p>
+<input type="text" v-model="info">
+
+<hr style="border: 1px solid cyan;">
+<a v-bind:href="tencent" style="border: 1px solid red;">点我</a>
+<img v-bind:src="img1" style="width: 80px;height:80px">
+<hr style="border: 1px solid cyan;">
+<p style="border: 1px solid cyan; width: 60px; text-align: center;">{{peoplesz[num]}}</p>
+<input type="text" v-model="money">
+<input type="button" @click="numchange()" value="点我">
+<hr style="border: 1px solid rgb(31, 134, 134);">
+<input type="text" v-bind:value="vall">
+<!-- v-bind单向绑定，数据=>视图，不能视图=>数据 -->
+
+
+<p @click="pchange()">{{nomove}}</p>
+<hr style="border: 1px solid cyan;">
+
+  <p style="border: 1px solid cyan; width: 150px;height: 30px; text-align: center;">{{arr[arr.length-1]}}</p>
+<input type="text" @change="inputchange" v-model="valll" id="p22">
+</div>
+
+
+    <script src="js\vue (1).js"></script>
+    <script>
+        let s =new Vue({
+            el: '#d5',
+           
+            data:{
+                info:18,
+                msg:`<p style="color:red">文本插值解析指令</p>`,
+                murder: [1,2,3,4],
+            
+             time:null,
+             tencent:'http://www.tencent.com',
+             img1:'http://pic.netbian.com/uploads/allimg/190422/210003-1555938003f127.jpg',
+               i:0,
+                murderinfu:{
+                 name:'张三丰',
+                 job:'solder',
+                 is:false
+               
+                },
+                peoplesz:['wss','ddd','dddw','srff','dadww'],
+                num:0,
+                money:999,
+                vall:777,
+                move:'你点击了我',
+                nomove:"你没点击我",
+                arr:[],
+                valll:''
+               
+          
+   
+            },
+            methods: {
+                numchange(){
+                    this.num = Math.round(Math.random()*4);
+                    this.money++
+                },
+                pchange(){
+                    this.nomove=this.move;
+                    this.move="你没点击我";
+                },
+                inputchange(){
+                    var c=document.getElementById('p22');
+                    this.arr.push(c.value);
+                    // 或者写成this.valll   input的v-model值与input的value一样的
+                   this.valll=''
+                }
+            },
+            // 生命周期阶段为这些钩子函数的执行条件，代码顺序无关
+            beforeCreate() {
+               console.log('beforeCreate'); 
+            
+            },
+            created() {
+                console.log('created'); 
+             
+            },
+            beforeMount() {
+                console.log('beforeMount'); 
+            },
+            mounted() {
+                console.log('mounted'); 
+                
+            },
+            beforeUpdate() {
+              this.time=new Date();
+           
+           let imgsz=['http://pic.netbian.com/uploads/allimg/190422/210003-1555938003f127.jpg','http://pic.netbian.com/uploads/allimg/200331/003551-1585586151dc33.jpg','http://pic.netbian.com/uploads/allimg/200313/235000-15841146009810.jpg','http://pic.netbian.com/uploads/allimg/190828/184140-15669889002d56.jpg','http://pic.netbian.com/uploads/allimg/190828/184140-15669889002d56.jpg','http://pic.netbian.com/uploads/allimg/200328/231430-158540847055cc.jpg'];
+          this.i++;
+          this.img1=imgsz[this.i]; 
+                   if(this.i==5){this.i=0;}
+        // this.i>=5?this.i=0:this.i++
+        // this.img1=imgsz[this.i]; 
+        
+            },
+           updated() {
+         
+       
+            },
+            beforeDestroy() {
+              
+            },
+            destroyed() {
+                console.log('destroyed');   
+            },
+        })
+    </script>
+
+</body>
+</html>

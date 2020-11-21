@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+   
+    </style>
+</head>
+
+<body>
+    <div class="" id="app">
+        <!-- <sup>h</sup>  
+        <sub>h</sub> -->
+        <hr>
+        <child-component>
+<p slot="footer">slot属性为footer的元素</p>
+<p>没有slot属性的元素，放在没有name的slot内</p>
+<p slot="h">虽然我在标签处最后，但由于模板处定义的h的solt在最前面，我被放在最前面的插槽 ，slot模板定义处决定顺序</p>
+        </child-component>
+        <!-- <child-component v-if="isshow"></child-component>  2233 -->
+
+
+        <hr>
+        <hr>
+        <slotprops>
+              <template v-slot:default="s">
+                
+                        
+                           <p>{{s.helloattribute}}</p>
+
+                 
+              </template>
+
+        </slotprops>
+    </div>
+
+    <script src="js\vue (1).js"></script>
+    <script>
+
+        let vm = new Vue({
+            el: '#app',
+            data:{
+                msg:'',
+                isshow:true
+            // 父组件数据（作用域）控制子组件     2233
+            },
+            components:{
+              'child-component':{
+                 template:`  <div v-if="isshow">
+                    <div class="h">
+                    <slot name="h"></slot>
+                         </div>
+
+                
+                    <slot>
+                        <mark>我是默认的内容，如果父组件没有内容，我就显示<br>
+                            组件嵌套是以  标签调用在另一个组件的模板形式实现的，如果父组件没有内容--被调用的父组件的模板 调用当前组件标签时 插槽输入域有没有数据
+                            </mark>
+                    </slot>
+                    <div class="footer">
+                    <slot name="footer"></slot>
+                    </div>
+                    <slot></slot>
+
+                    
+                    </div>`,
+                    // 一种具名slot 存放匹配标签处含有slot属性 且值相等的元素
+                    // 2.无名slot（单个插槽）容纳标签处没有slot属性的元素
+                 data(){
+                     return {
+                            // 子组件数据（作用域）控制子组件            组件作用域跟变量一个劲
+                         isshow:true
+                     }
+                 }
+               },
+               slotprops:{
+                   template:`
+                          <div>
+                               <slot :helloattribute="hello"></slot>
+                            </div>
+                   `,
+                   data(){
+                       return {
+                           hello:"子组件作用域的slot定义处 挂载属性2.父组件作用域使用<v-solt:default='引用名'>接收即可 "
+                       } 
+                   }
+               }
+                
+            }
+          
+            
+        })
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .bg-pic{
+        width: 400px;
+        height: 400px;
+        background-image: url("./flybird/img/wuxing.jpg");
+        background-size: cover;
+        position: relative;
+
+    }
+    .btn{
+        width: 60px;
+        margin: 10px;
+
+    }
+    .slot{
+        display: block;
+        width: 50px;
+        height: 50px;
+        border: 3px solid cyan;
+        border-radius: 50%;
+         position: absolute;
+         color: white;
+         line-height: 50px;
+         text-align: center;
+         font-size: 30px;
+    }
+    .jin-span{
+top: 30px;
+left: 175px;
+    }
+    .mu-span{
+        top: 115px;
+            right: 50px;
+
+    }
+    .shui-span{
+        top: 110px;
+left: 50px;
+    }
+
+    .tu-span{
+        top: 260px;
+left: 90px;
+     }
+     .huo-span {
+        top: 260px;
+        right: 90px;
+    }
+    .d1{
+        width: 200px;
+        height: 300px;
+    }
+    </style>
+</head>
+
+<body>
+
+    
+    <div class="" id="app">
+        <p>五行归位</p>
+        <div class="bg-pic">
+<span v-for="(item,index) in wuxinglist2" :key="index" :class= "['slot',wuxinglist2[index]+'-span']"
+@click="pickslot(index)">{{contentlist[index]}}</span>
+<!-- 动态赋值class   5个都有的slot，wuxinglist2的不同index  两个class值    单引号区分文本与data数据-->
+
+        </div>
+    <button class="btn" v-for="(item,index) in wuxinglist" :key="index+6"
+    @click="pickel(index)">{{item}}</button>
+
+
+    <hr>
+    <div :style="{backgroundColor:color}" class="d1">
+
+    </div>
+    <button @click="change(1)">green</button>
+    <button @click="change(2)">cyan</button>
+    <button @click="change(3)">blue</button>
+</div>
+
+
+    <script src="js\vue (1).js"></script>
+    <script>
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+            color:"",
+            wuxinglist:[
+                '金',
+                '木',
+                '水',
+                '火',
+                '土',
+            ],
+            wuxinglist2:[
+                'jin',
+                'mu',
+                'shui',
+                'huo',
+                'tu',
+            ],
+            contentlist:[
+                '','','','','',
+            ],
+            activeel:0
+
+            },
+       
+            watch: {
+             
+            },
+            methods: {
+                pickel:function(i) {
+                 this.activeel=i
+                //  赋给中间变量 判断元素
+                },
+
+
+                pickslot:function(i) {
+
+if(this.activeel == i){
+    this.contentlist.splice(i,1,this.wuxinglist[i])
+    // 需要触发视图更新 不能采用数组下标赋值  splice（起始，多少，内容）
+}else{
+    var c=document.getElementsByTagName("p")[0];
+    c.innerHTML=`
+                你点的是第${i}个,换一个圈圈
+    `
+}
+                },
+
+
+                change:function(x){
+                    if(x==1){
+                          this.color="green";
+                    }else if(x == 2){
+                           this.color="cyan";
+                    }else{
+                         this.color="blue";
+                    }
+                }
+               
+               
+            }
+
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>

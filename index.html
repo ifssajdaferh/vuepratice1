@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="" id="myapp">
+        <p>{{msg}}</p>
+        <input type="text" v-model="msg">
+ 
+<hr>
+<input type="text" v-model="num1">+
+<input type="text" v-model="num2">=
+
+<span>{{Number(num1)+Number(num2)}}</span>
+
+
+<hr>
+<input type="text" v-model="num3">-
+<input type="text" v-model="num4">=
+
+<span>{{Number(num3)-Number(num4)}}</span>
+
+
+
+<hr>
+<input type="text" v-model="num5">*
+<input type="text" v-model="num6">=
+
+<span>{{Number(num5)*Number(num6)}}</span>
+
+
+
+<hr>
+<input type="text" v-model="num7">/
+<input type="text" v-model="num8">=
+
+<span>{{Number(num7)/Number(num8)}}</span>
+
+
+   </div>
+   <div class="" id="d5">
+     
+       <p> her name is{{msg}}</p>
+       <p> {{ murder.length}}</p>
+       <p> 其中一个为{{murder[1]}}</p>
+       <p her name is{{murderinfu.name}}></p>
+       <p her job is{{murderinfu.jobs}}></p>
+
+
+   </div>
+    <script src="js\vue (1).js"></script>
+ <script id="template" type="x-template">
+    <div>
+        <ul>
+            <li>{{num1}}</li>
+            <li>{{num2}}</li>
+        </ul>
+
+        <div class="" id="myapp">
+            <p>{{msg}}</p>
+            <input type="text" v-model="msg">
+     
+    <hr>
+    <input type="text" v-model="num1">+
+    <input type="text" v-model="num2">=
+    
+    <span>{{Number(num1)+Number(num2)}}</span>
+    
+    
+    <hr>
+    <input type="text" v-model="num3">-
+    <input type="text" v-model="num4">=
+    
+    <span>{{Number(num3)-Number(num4)}}</span>
+    
+    
+    
+    <hr>
+    <input type="text" v-model="num5">*
+    <input type="text" v-model="num6">=
+    
+    <span>{{Number(num5)*Number(num6)}}</span>
+    
+    
+    
+    <hr>
+    <input type="text" v-model="num7">/
+    <input type="text" v-model="num8">=
+    
+    <span>{{Number(num7)/Number(num8)}}</span>
+    
+    
+       </div>
+    </div>
+</script>
+    <script>
+        let vm = new Vue({
+            el: '#myapp',
+            data: {
+                msg:'hello vue',
+                num1: 5,
+                num2: 44,
+                num3: 0,
+                num4: 0,
+                num5: 0,
+                num6: 0,
+                num7: 0,
+                num8: 0
+            },
+            template: `#template`
+        })
+    </script> 
+ <script>
+     let s =new Vue({
+         el: '#d5',
+         data:{
+             msg:777,
+             murder: [1,2,3,4],
+             murderinfu:{
+              name:'张三丰',
+              jobs:'solder'
+             }
+
+         }
+     })
+ </script>
+</body>
+</html>

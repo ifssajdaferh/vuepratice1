@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    
+    <div class="" id="app">
+        <p>全局注册</p>
+       <zzy></zzy>
+
+       <p>局部注册</p>
+   <zzyy></zzyy>
+<br>
+<p>is属性 让这些table td,select option...也可以插入组件</p>
+<table>
+    <tr>
+        <td is="abc">
+
+        </td>
+    </tr>
+</table>
+<br>
+<p>局部注册 + data函数</p>
+   <btn-component></btn-component>
+   <btn-component></btn-component>
+   <btn-component></btn-component>
+   <input type="text" v-model="msg">
+</div>
+
+
+    <script src="js\vue (1).js"></script>
+    <script>
+        Vue.component('zzy',{
+            template: '<h1>777</h1>'
+        })
+
+        Vue.component('abc',{
+            template: '<div>2233</div>>'
+        })
+
+        let child={
+            template:`<mark>2020-04-16</mark>`
+        }
+       
+let h=0;
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+            
+            
+                  
+            },
+       
+            watch: {
+             
+            },
+            methods: {
+               
+            },
+            components:{
+                zzyy:child,
+                'btn-component':{
+                        //   组件：就是传统vue+html模板的封装   
+                    // 组件内部数据必须通过data获取，保证了组件可移植性，然后因为放在data data需要是一个函数 能把数据return出来
+
+                    // 如果组件内部data内return外部全局定义的变量 对象数据，那由于是引用数据类型，return的是指针---无论多少个模板 数据源都是一样的。
+                    // 就会所有模板的操作一个数据源    这就造成了模板数据更新的一致性   这个一致性很多时候是不好的 
+                    // 所以可以在内部data定义 或者深拷贝外部return，这样每个模板调用都会各自维护一份数据
+                          
+                           template:'<button @click="nus++">{{nus}}</button>',
+                         
+                           data:function() {
+                             
+                               return {
+                                   nus:1,
+                                   mssg:'ww'
+
+                               }
+                         
+                           }
+                }
+            }
+
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>

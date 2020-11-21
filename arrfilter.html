@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    
+    <div class="" id="app">
+<p>通过计算属性过滤数组</p>
+
+<span v-for="(book,index) in booksfilter" :key="index">{{book.title}}</span>
+
+<span v-for="(book,index) in booksfiltername" :key="index+6">{{book.title}}</span>
+<!-- key值得唯一性  v-bind和index与index+6都是为了保证唯一性/ -->
+
+<button s="abc" @click="change(156,$event)">click我</button>
+<!-- 自定义属性封装到了事件对象 ，这个可以建立逻辑处理的连接  至于$可能是为了在参数列表当中区分 -->
+    </div>
+
+    <script src="js\vue (1).js"></script>
+    <script>
+
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                books:[
+                    {
+                        title:"ztml",
+                        author:"aaa"
+                    },
+                    {
+                        title:"css",
+                        author:"bbb"
+                    },
+                    {
+                        title:"js",
+                        author:"vvv"
+                    },
+                    {
+                        title:"javdda",
+                        author:"vvv"
+                    }
+
+                ]
+
+            },
+            computed: {
+    //  本项目第一个booksfilter因果脉络:本来v-for生成的html元素是绑定data的,但是有一些条件,在此加了一个在conputed定义的过滤器.
+    //  该过滤器的线路是 把data的数组筛选后=>得到第二个数组  让html元素的插值显示绑定到了过滤器的数组 。在此项目因果脉络 filter意义体现并不大，
+    //              本来一个函数也是可以的
+    // 关键的差别 使用了遍历数组的另一个方法--filter  值类型为函数    也是为什么数组的形参类似于foreach的item--数组项
+
+                booksfilter:function() {
+
+                    return this.books.filter(function(b){
+            //    filter方法自动给括号内的回调函数传参，参为filter获取的数组项，b即代表着函数的形参，
+                // 过滤器函数总接收表达式的值 (之前的操作链的结果) 作为第一个参数
+                // 这也是自动传递形参的一种--filter   还有sort内的函数  a和b
+
+            // 以函数嵌套的方式就是因为filter是以函数为值类型的方法
+            // 或者在创建 Vue 实例之前全局定义过滤器：实例外
+            // 组件的选项中定义本地的过滤器：即vue的属性 组件选项
+
+                         return b.author.match("v")
+                        // match是数组的方法，遍历出数组项包含括号值得数组项
+                    
+                       
+                    }
+                       
+                    )
+                },
+                booksfiltername:function() {
+                              return this.books.sort((a,b)=>{
+                                //   通过sort的函数值--自定义sort排序规则，
+                                  return a.title.length - b.title.length
+                              })
+                }
+            
+
+            },
+
+            watch: {
+             
+            },
+            methods: {
+                change:function(a,e) {
+                     console.log(a);
+                     console.log(e.target.attributes.s.value);
+                }
+                
+            }
+
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>

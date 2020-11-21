@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .active{
+            text-decoration: underline;
+
+        }
+        .error{
+            color:red;
+        }
+        .checked{
+            font-weight: 900;
+        }
+        .demo{
+            font-size: 20px;
+        }
+        .demo:hover{
+            font-size: 40px;
+            color: red;
+            font-weight: 200;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="" id="app">
+<h1>v-bind绑定class的数组语法以及绑定style</h1>
+<p :class="[activeclass,errorclass,checkedclass]">绑定class的数组语法-基础版</p>
+   <p :class="[isactive ? 'active' : '',errorclass]">  
+       <!-- 只要节点输出为符合数组的内容形式即可 加个解析表达式的文本解析符{}-->
+    绑定class的数组语法-包含三元表达式
+    <button @click="changeclass">toggle</button>
+   </p>
+
+   <p :class="[{active: isactive},errorclass]">
+       <!-- []这里边就要写变量  key和valur键值对  ：等于 =，要计算加了个{}-->
+    绑定class的数组语法-数组套对象
+    <button @click="changeclass">toggle</button>
+
+   </p>
+
+   <hr>
+   <hr>
+   <hr>
+<p :style="{fontSize:size,color:txtColor}">v-bind绑定内联样式</p>
+<input type="text" v-model="size">
+
+<p :style="stobj">绑定style-object</p>
+
+<!-- 这里就是把样式数据 以对象类型打包 ’样式对象‘放在data -->
+<!-- 这些都是对数据源 data的操作，大多形式上的改变，除了data还链接到methods和计算函数 -->
+<!-- 除了代码的空间 和 表现语法不一样，最终输出一样. 可以把键放在实例，也可以把值放在实例 -->
+<p :style="[stobj,style1]">进阶版-样式对象数组</p>
+
+<p class="demo" :style="{transition: time}">vue 监听完善内核版本前缀</p>
+
+
+</div>
+<script src="js\vue (1).js"></script>
+<script>
+    let vm=new Vue({
+        el:'#app',
+        data: {
+            activeclass:'active',
+            errorclass:'error',
+            checkedclass:'checked',
+            isactive: true,
+            size:'50px',
+             txtColor:'cyan',
+             stobj: {
+                fontSize:'50px',
+             },
+             style1: {
+                 color:'green'
+             },
+             time:'2s'
+
+        },
+        methods: {
+            changeclass() {
+                this.isactive=!this.isactive;
+            
+            }
+        },
+    })
+</script>
+
+</body>
+</html>

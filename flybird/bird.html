@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+.continer{
+    width: 350px;
+    height: 480px;
+    border: 1px solid black;
+    margin: 0 auto;
+  
+    background-image: url("img/bg.jpg");
+    /* 本质化找错，一开始以vs-code的操作认知-操作，却不知这个也会出现bug，加了多余节点，忽略了本质的代码上的 节点输出 */
+   background-size: 100% 100%;
+   position: relative;
+
+}
+
+
+.role{
+    position: absolute;
+top:20px;
+    display: none;
+
+}
+.count{
+    width: 100px;
+    height: 50px;
+    margin: 0 auto;
+}
+.count h1{
+    margin: 0 auto;
+    text-align: center;
+
+}
+#start1{
+    position: absolute;
+
+    left: 38%;
+    top:70%;
+}
+#head{
+    position: absolute;
+    top: 30%;
+
+}
+
+#head :nth-child(1){
+    position: absolute;
+    left:46px;
+}
+
+#head :nth-child(2){
+    width: 40px;
+    height: 26px;
+    display: inline-block;
+    background-image: url("img/bird0.png");
+    position: absolute;
+    left: 221px;
+}
+
+.count{
+    position: relative;
+    top: 30px;
+}
+.gameover{
+    position: absolute;
+    left: 60px;
+        top: 50%;
+
+        display: none;
+
+}
+    </style>
+</head>
+<body>
+    <audio src="./game_music.mp3" preload="auto" id="audio1"></audio>
+    <div class="continer">
+         
+        <div class="count">
+            <h1 id="h1">0</h1>
+        </div>
+
+        <div id="head">
+            <img src="img/head.jpg" alt="">
+            <!-- <img src="img/bird0.png" alt=""> -->
+            <!-- css操作span 加图片... -->
+             <span></span>
+             
+        </div>
+        
+
+        <div id="start1">
+            <img src="img/start.jpg" alt="" id="start">
+    
+        </div>
+<!-- 本鸟 -->
+        <div class="role">
+            <img src="img/up_bird1.png" alt="">
+
+        </div>
+        <ul id="ductwarp">
+            
+        </ul>
+
+        <div class="gameover">
+            <img src="img/game_over.jpg" alt="">
+        </div>
+
+    </div>
+<script>
+
+var startbtn=document.querySelector("#start1");
+// 这是jq选择器 括号语法符合jq，而id classname --不用加点 # 那是css的写法
+
+
+var docuwarp=document.getElementById("ductwarp");
+console.log(docuwarp);
+var head=document.querySelector("#head");
+
+var douwarptimer=null;
+
+// 管道移动的判断元素
+var isfalse =true;
+
+var gameover = document.getElementsByClassName(gameover);
+
+
+var count=document.getElementById("h1");
+
+var audio=document.getElementsByTagName("audio")[0];
+console.log(audio);
+var role=document.getElementsByClassName("role")[0];
+console.log(role);
+// 单击事件
+startbtn.onclick=function() {
+    // 用户触发开始 事件的导向 处理      动向发展前的静态处理
+    head.style.display="none";
+    startbtn.style.display="none";
+    role.style.display="block";
+// 同上
+    // 获取到的head---html元素生成的dom的节点对象  ，控制台可查看这个对象的各种数据 role.attributeStyleMap
+    // role.attributes  写出元素对象标识符加上.   --自动出来方法，属性  无论自定义的还是原生的
+    // 只有html元素名出现，才算是获取成功，像undefined，null，都是错的
+    // calssname获取到的是html[]形式的集合-伪数组
+    // id这种唯一的 获取到的就是唯一的html元素，dom对象，  classname 和 tagname都是html的集合-伪数组
+    // 像获取到的是多的 -集合  带上数组形式的选择下标就好，不然html集合是没有dom对象的属性
+   // 获取到的dom节点对象.临近分支都会封装成对象的属性 parentnode,children ...   任何节点都是，这就是dom对象
+
+
+
+    // 开始动态处理
+
+    // 控制鸟移动的定时器
+    role.speed=0;
+    // role就是本鸟 dom节点对象，这里赋值一个属性
+    // speed下降-放在外面不能局限于0.3秒这个时间轴，
+    // 至于speed代表的转换后的小鸟上还是下  取决于正负speed
+   
+    role.moveTimer = setInterval(function () {
+        // 给role对象加属性的赋值接shou方式
+        // 整个函数 执行一次就是0.3秒的时间下，在逻辑处理记住这点
+     role.speed += 0.5;
+               if(this.speed <= 0){
+                   role.children[0].src="img/up_bird0.png";
+                //    down
+               }else{
+                role.children[0].src="img/up_bird1.png";
+                // 获取到的dom节点对象.临近分支都会封装成对象的属性 parentnode,children ...   任何节点都是，这就是dom对象
+
+               }
+               role.style.top = role.offsetTop + role.speed + "px";
+            
+
+
+
+            }, 300);
+
+
+}
+   
+</script>  
+
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+   
+    </style>
+</head>
+
+<body>
+    <div class="" id="app">
+        <p>子组件的num值：{{num1}}</p>
+        <hr>
+ <wsb @www="change"></wsb>
+ <hr>
+ <!-- // 组件上使用v-mode; -->
+
+ <xcx v-model="num2"></xcx>
+
+ <h1>{{num2}}</h1>
+ <p>本质上v-model就到等同与v-on:input 写法不同功能一样，v-model也是一个语法糖  包含了下方两个 on和bind</p>
+ <hr>
+ <input type="text" v-on:input=" num3 = $event.target.value" v-bind:value="num3">
+ <p>{{num3}}</p>
+<hr>
+ <!-- 第三个例子  使用v-moldel 父组件向子组件传值   -->
+<!-- <aaa :attribute="num4"></aaa> -->
+<aaa v-model="num4"> </aaa>
+
+<button v-on:click="changenum()">-</button>
+
+    </div>
+
+
+
+    <script src="js\vue (1).js"></script>
+    <script>
+  
+        let vm = new Vue({
+            el: '#app',
+            data:{
+                num1:1,
+                num2:0,
+                num3:'',
+                num4:0
+             
+            },
+            methods: {
+            },
+            components:{
+                'wsb':{
+                    template:`
+                    <div style="width:200px;height:200px;border:1px solid cyan">
+                    <span>{{num}}</span>
+                    <button v-on:click="clickchange">click me</button>
+                    </div>
+                    `,
+                    data (){
+                        return{
+                            num:1
+                            
+                        }
+
+                    },
+                    methods:{
+                        clickchange() {
+                            this.num++
+                            this.$emit('www',this.num,666)
+                            // 1使用组件的$emit方法自定义组件的事件   括号内是事件名和实参列表
+                            // 2在父组件 使用v-on监听这个子组件定义好的事件
+                            // 3在父组件 给这个事件添加函数 函数括号是对应形参  接收数据
+                    }
+                },
+                  
+            },
+            // 组件上使用v-mode;
+            xcx:{template:`
+                <div>
+                    <p>{{num}}</p>
+                    <button @click="handerclick">click me</button>
+                
+                </div>
+                `,
+                data (){
+                    return{
+                        num:0
+                    }
+                },
+                methods:{
+                    handerclick(){
+                             this.num++
+                             this.$emit('input',this.num)
+                    }
+                }
+                   
+            },
+            aaa:{
+                template:`
+                <div>
+                   <input :value="value">
+                    </div>
+                `,
+
+
+                props:['value']
+                // 在父组件使用v-model等同于v-bind赋值的时候 子组件通过value关键字接收
+
+                // 父组件的数据源 通过v-model 动态绑定了子组件的props------然后子组件的props 通过v-bind动态绑定了input
+                // 组件与组件的动态绑定---组件内部的动态绑定
+                // 父组件也有一个数据处理 这不重要 重要的是 父组件的节点输出就是num4这个数据
+            }
+
+        },
+        methods:{
+            change(val) {
+                    this.num1=val
+                    
+            },
+            changenum(){
+                this.num4 --
+            }
+        },
+
+            
+        })
+
+
+    </script>
+</body>
+
+</html>

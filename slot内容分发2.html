@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+   
+    </style>
+</head>
+
+<body>
+    <div class="" id="app">
+     <wsb>
+       
+        <p>2</p>
+        <p slot="w">3</p>
+        <p>4</p>
+        <button>55</button>
+
+        <!-- 可以看到匿名的元素全部作为整体存进一个slot -->
+       
+
+     </wsb>
+
+
+
+     <hr>
+     <hr>
+
+
+
+
+     <w :bookvalue="books">
+       <template v-slot:default="item">
+        <li v-for="(num,index) in item" :key="index" >{{item[index]}}</li>
+        <!-- 数据表达问题还有具名插槽的对应问题 -->
+        <!-- slot="num" -->
+       </template>
+
+     </w>
+
+
+    </div>
+
+    <script src="js\vue (1).js"></script>
+    <script>
+
+        let vm = new Vue({
+            el: '#app',
+            data:{
+                books:[
+                    {books1:'三体'},
+                    {books2:'人类简史'},
+                    {books3:'经济学原理'},
+                    {books4:'复杂性思维'},
+
+            ]
+            },
+            mounted() {
+                
+                console.log(this.books[2])
+            },
+            components:{
+                wsb:{
+                    template:`
+                    <div>
+                        <p>1</p>
+                            <slot></slot>
+                            <slot name="w"></slot>
+
+                        </div>
+                    `
+                },
+
+
+
+
+                w:{
+                    template:`
+                            <ul>
+                            <slot v-for="(num,index) in bookvalue" :item="bookvalue"></slot>
+                         
+                            </ul>
+                    `,
+                       // name="num"
+                    props:{
+                        bookvalue:{
+                             type:Array,
+                        default:function() {
+                            return [ ]
+                        }
+                        }
+                       
+                    }
+                }
+                
+            }
+          
+            
+        })
+
+
+    </script>
+</body>
+
+</html>

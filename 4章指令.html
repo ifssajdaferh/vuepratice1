@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     
+    </style>
+</head>
+<body>
+    
+
+    <div class="" id="app">
+<h1>条件渲染指令</h1>
+<p>我会出现</p>
+<p v-if="false">我不会出现</p>
+
+<p v-if="value1">我不会出现</p>
+<p v-else>
+    <span>这个else不会和上边的if同时出现,这个机制可做单选题逻辑</span>
+</p>
+<input type="text" v-model="value1">
+<hr>
+<hr>
+<p v-if="value2 =='a'">000000</p>
+<p v-else-if="value2 =='b'">1111111</p>
+<template v-else="value2 =='c'">
+    <div>
+ 
+     <p >加个父标签-统一领地-统一操作 </p>  
+          <p >其他的标签会有‘私货’</p>  
+    </div>
+</template>
+
+<input type="text" v-model="value2">
+<hr>
+<hr>
+<p>key属性-表示是否需要重新渲染</p>
+
+<template v-if="value3 == 'username'">
+
+ 
+
+ <p>请输入手机号<input type="text" placeholder="请输入手机号" key="1"> <button @click="methodchange()">切换登录方式</button>  </p> 
+<p>vue最高效的dom更新方式，-复用，可以使用key禁用这一方式 有id的区分性，但他服务于渲染页面</p>
+
+</template>
+<template v-else >
+
+ <p>请输入用户名<input type="text" placeholder="请输入用户名" key="2"><button @click="methodchange()">切换登录方式</button></p>
+  
+      
+    
+</template>
+<hr>
+<hr>
+<p v-show="1">v-show  值为布尔值输出，v-if是不渲染，这个只是隐身. v-show初始化成本高，切换成本低，适用选项卡。
+      而v-if相对来说正好相反，适用登录切换   </p>
+      <p>至于原因可以从本身特点和页面加载流程去找</p>
+<p v-show="0">隐身.</p>
+<hr>
+<hr>
+<p v-for="x in huluwas">{{x}}
+</p>
+
+<hr>
+<hr>
+<!-- 购物车遍历小栗子 -->
+
+<p v-for="a in cartlist">
+       <span>{{a.name}}</span>,价格<span>{{a.price}}</span>
+       <p>数据是一个 对象数组，每一次返回一个对象</p>
+</p>
+    </div>
+
+    <script src="js\vue (1).js"></script>
+    <script>
+        let vm=new Vue({
+            el:'#app',
+            data: {
+                value1:0,
+                value2:'a',
+                value3:'username',
+          
+                huluwas: [
+                    'one',
+                    'two',
+                    'three',
+                    'four',
+                ],
+
+                cartlist:[
+                    {
+                        name:'iphone 11',
+                        price:9999
+                    },
+                    {
+                        name:'min 10',
+                        price:1999
+                    }
+                ]
+
+            },
+          
+            methods: {
+                methodchange:function() {
+this.value3 =='username' ? this.value3 ='phone' : this.value3 ='username' 
+                }
+            },
+        })
+    </script>
+</body>
+</html>

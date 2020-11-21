@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    
+
+    </style>
+</head>
+
+<body>
+
+    
+    <div class="" id="app">
+        <input type="text" v-focus>
+
+<input type="text" v-model.lazy="msg4"><p>{{msg4}}</p>
+        <div v-demo.a.b="msg4">
+            
+        </div>
+    
+
+        <hr>
+        <input type="text" v-change="{color:msg2,text:msg4}" >
+</div>
+
+
+    <script src="js\vue (1).js"></script>
+    <script>
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg4:'wsb',
+                msg2:'red'
+             
+
+            },
+            //自定义的局部注册
+            // 把功能封装到指令，与函数相比-----除了写法上的打破输入域的限制，还有调用复用方便.
+            directives:{
+                //   指令注册关键字
+                  focus:{
+                //    声明自定义指令名
+                      inserted:function(el) {
+                        //   自定义指令的"钩子函数" ,这里传一个元素节点对象参数,有更多的参数 官网
+                        el.focus();
+
+                      }
+
+                  },
+                  blur:{
+
+                  },
+                  demo:{
+                      bind:function(el,binding,vnode) {
+                        //   传递三个指令内置对象
+                          let str=JSON.stringify;
+                        //   没加括号 就是一个方法 赋给变量str
+                        el.innerHTML=`
+                    name:${str(binding.name)} <br>
+                    value:${str(binding.value)}<br>
+                    expression:${str(binding.expression)}<br>
+                    modifiers:${str(binding.modifiers)}<br>
+                    vnode keys:${Object.keys(vnode).join(', ')}
+                         
+                        `
+                                  // binding是自定义指令的内置对象，包含了指令的信息，   ￥{}是es6的jq拼接字符串写法 这里就是输出指令信息
+                    // 如binding 的 modifires属性就是修饰符信息   
+                      },
+                  
+                  },
+                  change:{
+                    updated:function(el,binding,vnode) {
+                          console.log(binding.expression);
+                          console.log(binding.value);
+                          console.log("binding.value");
+                      }
+                  }
+            },
+            watch: {
+             
+            },
+            methods: {
+               
+               
+            }
+
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>

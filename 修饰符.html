@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       .double{
+           background-color: red;
+       }
+
+    </style>
+</head>
+
+<body>
+
+    
+    <div class="" id="app">
+
+        <a href="http://www.tencent.com" @click="change">点我</a>
+             
+        <div @click="big">
+            <input type="text" @keyup.enter="changeinput">
+            <button @click.stop="small">click me
+
+        <!-- js的事件流--捕获事件自上而下 类似dom结构 window-docu-body-div...,执行事件称为冒泡 自下而上  修饰符
+                .stop从当前元素层级开始，阻止向上冒泡执行.   这个机制可以是很多时候阻止处理的逻辑依赖  比如一块重合的html区域
+            元素a的事件利用.once（执行一次）然后往上冒泡执行    事件的执行有了控制 -->
+            <!-- 这些事件修饰符可以监听键盘的事件  但注意@后面的事件类型  esc enter tab space ......  但最终是为了组织处理 控制 监听的有意义，如监听ctrl键 -->
+
+        </button>
+    </div>
+<!-- 不仅只可以事件类型.处理类型     还可以事件类型。事件类型   vue语法表示一起按 -->
+    <button type="text" @click="clickchange" @click.ctrl="doublichange"  :class="{double: doublestyle}"> ctrl+click </button>
+    <!-- 事件处理 -- (data) --html元素[达成为class属性绑定 data为变化条件]     a为b的控制节点 b为c的条件节点  通过b控制c 有各自的达成-->
+<!-- 二元表达式 后边布尔值 两个导向 -->
+    </div>
+
+    <script src="js\vue (1).js"></script>
+    <script>
+
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                doublestyle:false
+
+            },
+            watch: {
+             
+            },
+            methods: {
+                change:function() {
+                    e.preventDefault();
+                    
+                },
+                small:function() {
+                    console.log("small")
+                },
+                big:function() {
+                    console.log("big");
+                },
+                changeinput:function(e) {
+                    console.log(e);
+                },
+
+                     clickchange:function() {
+                    this.doublestyle=!this.doublestyle;
+                    console.log("aaa")
+                },
+                doublichange:function() {
+                    // this.doublestyle=this.doublestyle;
+                    console.log(this.doublestyle)
+                    // 修饰符.html:70 true
+                    // 修饰符.html:74 false
+                        //  问题描述：组合键会按顺序执行 起码这里是先执行了单击事件  在执行了ctrl+click
+                        // 这种问题导致了组织处理的强制性特点  但是通过以下 反而利用了这种特点
+                        // 通过变量的解决方案----把以前的取反值！去掉    或许事件修饰符是另一种解决方向
+                         
+                         
+                        // 两个不同的节点连接分别执行，但是相同的节点按顺序共同执行
+                 // 即组合键事件相当于一个函数  所以歧义性处理 如同一个节点内的变量取反值，写在一个事件就好了
+                    
+                },
+               
+            }
+
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+   
+    </style>
+</head>
+
+<body>
+    <div class="" id="app">
+        <div>{{msg}}</div>
+      <wsb></wsb>
+    </div>
+
+<!-- 挂载bus  运行bus         只不过第一个在组件内的click事件 触发挂载，另一个在mounted钩子函数  触发执行 -->
+
+    <script src="js\vue (1).js"></script>
+    <script>
+        Vue.component('wsb',{
+            template:`
+                    <div>
+                        <button @click="handlerevent">click</button>
+                        </div>
+                    `,
+                    methods:{
+                        handlerevent(){
+                            bus.$emit('on-msg',"这是一个组件")
+                        }
+                    }
+               })
+       
+
+               let bus =new Vue({})
+                   
+              
+        let vm = new Vue({
+            el: '#app',
+            data:{
+                msg:''
+            
+            },
+          mounted() {
+              let _this = this;
+              bus.$on('on-msg',function(data) {
+                        _this.msg=data;
+              })
+          },
+            
+        })
+
+
+    </script>
+</body>
+
+</html>

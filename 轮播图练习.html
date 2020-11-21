@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: green;
+        }
+        .d1{
+            width: 500px;
+            height: 400px;
+         
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .divfather{
+       width: 2015px;
+               height: 400px;
+            
+               position: absolute;
+         
+            
+               left: 0px;
+               /* 初始化 必须要给 不然一开始会出问题 */
+               transition: ease-out 0.5s;
+              
+        }
+
+        .childdiv{
+            width: 500px;
+              height: 400px;
+             
+            float: left;
+            /* float: left属性需要父元素有折磨多的宽 才能横向排列; */
+         
+         
+
+        }
+        img{
+            width: 100%;
+            height: 100%;
+         
+        }
+      
+        #btnd{
+           width: 100px;
+           height: 30px;
+           position: absolute;
+           left: 550px;
+        }
+        .btns1{
+          background-color: cyan;
+          opacity: 30;
+          outline: none;
+position: relative;
+left: 400px;
+        }
+        .btns2{
+          background-color: cyan;
+          opacity: 30%;
+          outline: none;
+          position: relative;
+left: 400px;
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <div class="d1">
+        <div class="divfather">
+        <div id="d2" class="childdiv"><img src="./flybird/img/俯视森林雪景4k风景壁纸_彼岸图网.jpg" alt=""></div>
+        <div id="d3" class="childdiv"><img src="./flybird/img/刚起床的美女唯美插画4k动漫壁纸_彼岸图网.jpg" alt=""></div>
+        <div id="d4" class="childdiv"><img src="./flybird/img/吃货女子 炒货 年糕 撸串 饮料 6k动漫壁纸_彼岸图网.jpg" alt=""></div>
+        <div id="d5" class="childdiv"><img src="./flybird/img/绿河 by_Nikolai Lockertsen 4k壁纸_彼岸图网.jpg" alt=""></div>
+    
+        </div>
+     
+    </div>
+   <div id="btnd">
+         <button class="btns1">左</button>
+       <button class="btns2">右</button>
+   </div>
+
+
+<script>
+var c=document.querySelector(".divfather");
+var btn1=document.getElementsByClassName("btns1")[0]
+var btn2=document.getElementsByClassName("btns2")[0]
+let p=[
+    0,-500,-1000,-1500,
+]
+let h=0;
+// 放外边不然每次都重新赋为-500
+let s =0;
+btn1.onclick=function leftchange() {
+    h +=500
+    if(h == -2000){
+                        h=0
+             }else if(h == 500){
+                 h=-1500
+
+             }  
+   
+             c.style.left =h + "px" 
+ 
+   
+}
+
+
+
+btn2.onclick=function rightchange() {
+    h -=500
+    if(h == -2000){
+                        h=0
+             }else if(h == 500){
+                 h=-1500
+
+             } 
+               
+               cleartimer(timer) 
+  timer=      setInterval(function () {    page() },2000)
+  c.style.left =h + "px" 
+            
+}
+
+var timer=setInterval(p=>{
+   
+
+  
+
+   
+           
+ 
+    c.style.left =page() + "px"
+    
+    
+
+
+},2000)
+
+function page(){
+
+h -= 500;
+ if(h == -2000){
+                        h=0
+             }else if(h == 500){
+                 h=-1500
+
+             }  
+              
+  return h
+
+
+}
+
+
+
+
+
+</script>
+</body>
+</html>

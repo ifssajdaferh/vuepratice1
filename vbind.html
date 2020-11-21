@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .text{
+            text-decoration: line-through;
+
+        }
+        .text1{
+            text-decoration: overline;
+        }
+        .other-class{
+            text-decoration: underline;
+        }
+        .red{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+   <div class="" id="app">
+<p :class="class1+1">1-1.通过vue控制class-字符串拼接</p>
+<p :class="{text: hasclass}">
+2-1.通过vue控制class-object
+<button @click="hasclass = !hasclass">toggle</button>
+
+</p>
+
+<p :class="{'other-class': hasclass}">2-2.通过vue控制class-object</p>
+<p :class="{'other-class': hasclass}" class="red">2-3.多个class值</p>
+
+<p :class="classobj">2-4.计算放在data</p>
+
+<p :class="change">2-5.计算放在计算属性</p>
+   </div>
+
+
+   <script src="js\vue (1).js"></script>
+   <script>
+let vm = new Vue({
+    el:'#app',
+    data: {
+        class1:'text',
+        hasclass:true,
+        istxt:false,
+        isactive:true,
+        classobj:{
+            'other-class':true,
+            text:false,
+            active:true
+        }
+            
+        
+    },
+    computed:{
+        change:function() {
+            // ...
+         return {
+            'other-class':1,
+            text:false,
+            active:0
+         }
+
+        }
+    }
+})
+    </script>
+</body>
+</html>

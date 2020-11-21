@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+#app{
+    width: 400px;
+    height: 600px;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin: 0 auto;
+
+}
+.chatlogs{
+    padding: 10px;
+height: 400px;
+    overflow: auto;
+
+}
+.edit{
+    height: 200px;
+    border-top: 1px solid cyan;
+    position: relative;
+}
+.info{
+    border: none;
+    outline: none;
+    display: block;
+    width: 390px;
+    margin-left: 5px;
+    margin-top: 5px;
+    height: 40px;
+    max-height: 160px;
+    overflow: auto;
+}
+.btn{
+    border: none;
+    outline: none;
+    display: block;
+    width: 70px;
+    height: 30px;
+    position: absolute;
+    bottom: 25px;
+    right: 5px;
+    background-color: #56a5f1;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+
+}
+.btn-b{
+
+    right: 80px;
+}
+.my{
+    text-align: right;
+}
+.other{
+    color: red;
+}
+
+    </style>
+</head>
+
+<body>
+
+
+    <div class="" id="app">
+
+<div class="chatlogs">
+<p v-for="msg in msglogs" :class="{my:msg.role == 'a',other: msg.role =='b'}">
+    {{msg.content}}
+</p>
+
+</div>
+
+
+<div class="edit">
+<input type="text" class="info" autofocus v-model="info">
+<button class="btn" @click="sendmsg('a')">send a</button>
+<button class="btn btn-b" @click="sendmsg('b')">send b</button>
+
+</div>
+    </div>
+
+    <script src="js\vue (1).js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                info:'',
+msglogs:[
+ {content:'欢迎观临',
+    role:'a'
+} ,
+{
+    content:'他来了，他来了',
+    role:'b'
+}
+
+
+
+]
+  
+
+
+            },
+
+            methods: {
+sendmsg(role) {
+    let msg={
+        content:this.info,
+        role:role
+
+    }
+    this.msglogs.push(msg);
+    this.info=''
+}
+            }
+
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>

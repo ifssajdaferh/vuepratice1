@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+   
+    </style>
+</head>
+
+<body>
+    <div class="" id="app">
+       <componetsname>
+
+       </componetsname>
+       <componentnumtwo></componentnumtwo>
+       <componentsnumthree></componentsnumthree>
+       <componentsnumthree></componentsnumthree>
+
+<hr>
+         <componentfour></componentfour>
+
+<h1>组件的信息传输</h1>
+         <componentsfive info="第一步：在父组件（页面）通过标签属性方式传值" info1="第二步 通过props属性接收值   一种是如上的字符串数组，一种是对象
+         " v-bind:infoarray="[1,'属性加一个v-bind指令就打破单纯的字符串数据类型 在此是数组',3]" w-w="等价转换"></componentsfive>
+         <!-- 这是赋值节点的认知 -->
+
+<hr>
+         <obj-props :pro-a="100" pro-b="abc" :pro-d="11" :pro-e="[1,2,3]" pro-f="wsb"></obj-props>
+    </div>
+
+
+
+    <script src="js\vue (1).js"></script>
+    <script>
+        Vue.component('componetsname',{
+            template:'<mark>hello componets</mark>'
+    
+})
+
+let s={
+    template:'<h1>把模板放在外边赋值给变量</h1>'
+    // 得有一个模板template操作html  ，因为组件就是html js 的结合体 骨架 样式 逻辑
+}
+
+
+        let vm = new Vue({
+            el: '#app',
+            data (){
+                
+                return {
+
+                }
+            },
+            methods: {
+            },
+            components:{
+                'componentnumtwo':s,
+                'componentsnumthree':{
+                    template:'<button v-on:click="num1++">{{num1}}</button>',
+                    data:function() {
+                       
+                         return {
+                             num1:1
+                            //  外部的数据源 给组件会是引用数据类型，多个组件共享一个。 而这个是每个组件内部的数据源，多个组件互不干扰
+                         }
+                    }
+                },
+                componentfour:{
+                    template:'<h1>{{date}}</h1>',
+                    data () {
+                        return {
+                        date:new Date()
+                                // new Date()方法返回一个日期字符串 作为date的键值
+                }
+                }
+                },
+                componentsfive:{
+                    template:'<h2>{{info}}<br>{{info1}}<br>{{infoarray[1]}}</br><h1>{{wW}}</h1></h2>',
+                    // template后面的html内容必须有一个根元素 在此h2
+                    props:['info','info1','infoarray','wW'
+
+                    ],
+                    // 第二步 通过props属性接收值   一种是如上的字符串数组，一种是对象
+                    data () {
+                        return {
+                }
+                }
+
+                },
+                'obj-props':{
+                    template:`
+                        <div>
+                        <p>i'm a component </p>
+                        <p>{{proA}}</p>
+                        <p>{{proB}}</p>
+                        <p>{{proC}}</p>
+                        <p>{{proD}}</p>
+                        <p>{{proE}}</p>
+                        <p>{{proF}}</p>
+                        </div>
+                    `,
+                    props:{
+                    proA:Number,
+                    proB:[String,Number],
+                    proC:{
+                        type:Boolean,
+                        default:false
+                    },
+                    proD:{
+                        type:Number,
+                        default:789,
+                        required:false
+                    },
+                    proE:{
+                        type:Array,
+                        default:function() {
+                            return [ ]
+                            // 为了解决数据源重复的问题,好像vue的组件很中意函数返回值  这里也是一个default：函数返回值的数据形式   ，跟组件data一样的
+                            // 利用函数的深拷贝特点？不管怎样 < vue通过函数返回值给到组件数据 >解决了数据源重复的问题
+                        }
+                    },
+                    proF:{
+                       validator:function(val) {
+               return val>10
+                       }
+                    //    validator属性 相当于过滤器  val默认提供的对象 函数参数接收  值也是一个 函数返回值
+                
+                    }
+
+        //   props的节点 知识纵向深度很深    对于此 只需记住一句话 ：props的对象为值类型的写法功能更加强大，对数据有二次处理能力 
+        // 不像数组的值类型 只是把数据简单的转接给模板使用
+                }
+                },
+             
+                
+                
+                
+                
+
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

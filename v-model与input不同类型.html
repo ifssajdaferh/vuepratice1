@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    
+
+    </style>
+</head>
+
+<body>
+
+    
+    <div class="" id="app">
+        <!-- multiplehtml属性 多选属性 -->
+<select multiple v-model="msg">            
+<option value="1">上海</option>
+<option value="2">北京</option>
+<option value="3">河南</option>
+        
+</select>
+        <p>{{msg}}</p>
+
+  <!-- 元素采取用户数据--v-model传给未处理的 data msg ---p再显示处理好的msg -->
+        <!-- v-model 让元素信息源与数据保持同步  后面的就是一些导向分支 因果连接 -->
+        <hr>
+
+        <input type="text" @input="change($event)">
+        <br>    <br>    <br>   
+        <!-- 获取到的信息动态赋值给  连接好展示元素textarea的  data.msg2 -->
+     <!-- 但这个节点内的 重要节点在于 获取到input内用户输入的值  --采取的方式是传递事件对象  从事件对象内获取 -->
+
+        <textarea v-model="msg2"></textarea>
+<br>
+
+        <select name="" id="" v-model="location">
+            <!-- v-model相当于存值 -->
+
+            <option v-for="(city,index) in options" :key="index" :value="city.val">
+                <!-- val是一个所需数据的集合 可以自己写键值对进去{}-->
+                {{city.text}}
+                <!-- city=options[i] -->
+            </option>
+
+        </select>
+        <p>所选地址为：{{location.value}}({{location.code}})</p>
+
+      <!-- 取值（达成：option的 v-bind：value）---存值（达成： 父元素select的v-model）  ----p显示 -->
+    
+    <hr>
+    <p>修饰符</p>
+        <span>v-model的修饰符.lazy  本来在input事件同步视图数据 加这个改成改为change  更多的意义在于 如ajax请求 就可以延迟发 节省请求次数  比如百度的搜索框   有时候没有必要那摩的的更新率  防抖节流特点 </span>
+        <input type="text" v-model.lazy="msg4">
+        <p>{{msg4}}</p>
+
+        <hr>
+        <span>.number两个特点 1会自动转成数值类型 但输入开头必须是数值 否则无效 2对data单向操作时候 过滤数字无关的
+    应用场景 比如 邮箱  ，简单一句话 从用户输入提取出有价值的数字部分  开头就是数字的手机号
+</span>
+<p>{{msg5}}</p>
+<input type="text" v-model.number="msg5">
+
+<hr>
+<p>trim   数据视图都去掉首尾空格  </p>
+<input type="text" v-model.trim="msg6">
+<p>{{msg6}}</p>
+
+<!-- 以上就是v-model input的三个修饰指令 -->
+
+</div>
+
+
+    <script src="js\vue (1).js"></script>
+    <script>
+// var m="https://CODEWORDS.RECURSE.COM/ISSUES/ONE/AN-INTRODUCTION-TO-FUNCTIIONAL-PROGRAMMING";
+
+// var c = m.toLowerCase();
+
+// console.log(c);
+// 这种字符串处理函数  或者大胆的说有renturn的函数  需要有一个值去接受的   ，调用并不代表改变了调用对象本身
+// 函数只有return-即生成你想要的变量    并没有给调用对象赋值的语句
+
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+               msg:[],
+               msg4:'wwwwww',
+               msg2:"",
+               msg6:'',
+               msg5:null,
+               location:[],
+               options:[
+                   {
+                       text:'郑州',
+                       val:{
+                       value:'郑州',
+                       code:'001'
+                       }
+                   },
+                   {
+                       text:'上海',
+                       val:{
+                       value:'上海',
+                       code:'002'
+                       }
+                   },
+                   {
+                       text:'北京',
+                       val:{
+                       value:'北京',
+                       code:'003'
+                       }
+                   },
+               ]
+
+             
+
+            },
+            watch: {
+             
+            },
+            methods: {
+                change:function(e) {
+                    this.msg2=e.target.value
+                }
+
+               
+            }
+
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>

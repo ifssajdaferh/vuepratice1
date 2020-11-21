@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.page{
+    /* width: 40px; */
+   
+    height: 20px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 10px;
+}
+.page:hover{
+    background-color: cyan;
+    color: white;
+}
+.active {
+    text-decoration: underline;
+}
+.active:hover{
+    cursor: not-allowed;
+}
+
+
+
+    </style>
+</head>
+<body>
+    
+
+    <div class="" id="app">
+
+
+
+<h1><v-for>高级使用</v-for></h1>
+<span v-for="(stu,index) in stuarr">{{index+1}}{{stu}}<br></span>
+<hr>
+<p>v-for遍历对象</p>
+<span v-for="info in studetail">{{info}} &nbsp;</span>
+<hr>
+<span v-for="(info,key,index) in studetail">
+ {{index+1}}.{{key}}:{{info}}
+     &nbsp;</span>
+<hr>
+<p>v-for遍历证书</p>
+<button v-for="num in 3">btn{{num}}</button>
+<hr>
+     <p>模拟分页</p>
+     <span  class="page" v-show="currentpage != 1" @click="currentpage--">上一页</span>
+<span v-for="num in 5"  
+:class="[{active:num == currentpage},'page']" 
+
+@click="changepage(num)">{{num}}
+</span>
+<!-- 书写格式的输出，类型要求层层递进  比如简单判断处理用花括号，但花括号上级是一个数组，那或括号的输出就要符合上一级的要求形式 -->
+<span  class="page" v-show="currentpage != 5" @click="currentpage++">下一页</span>
+   <hr>
+
+   <span v-for="a in studetail">{{a}}&nbsp;&nbsp;</span>
+<input type="text">
+<button id="btn1">操作</button>
+
+
+</div>
+
+    <script src="js\vue (1).js"></script>
+    <script>
+        let vm=new Vue({
+            el:'#app',
+            data: {
+            stuarr:[
+               ' stu1',
+               ' stu2',
+               ' stu3',
+                'stu4',
+               ' stu5'
+            ],
+            studetail:{
+                name:'jackma',
+                class:'one',
+                stuno:'001',
+                age:'18',
+                gender:'main'
+            },
+            style1:{
+                color:'',
+                backgroundColor:''
+            },
+            currentpage:1
+            },
+          
+            methods: {
+               change:function() {
+                   this.style1.color="white";
+                   this.style1.backgroundColor="cyan";
+               },
+
+                  changepage:function(num) {
+               if( this.currentpage != num){
+                    this.currentpage=num;
+}
+            }
+          
+            }
+         
+          
+         })
+
+
+    </script>
+
+</body>
+</html>

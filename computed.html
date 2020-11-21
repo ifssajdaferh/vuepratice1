@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .s1{
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+    <hr style="border: 1px solid cyan;">  
+
+
+<span class="s1">{{arr[0].name}}</span>
+<span>{{arr[0].price}}</span>
+<span>{{arr[0].num}}</span>
+<hr style="border: 1px solid cyan;">  
+
+
+<span class="s1">{{arr[1].name}}</span>
+<span>{{arr[1].price}}</span>
+<span>{{arr[1].num}}</span>
+<hr style="border: 1px solid cyan;">  
+<p>总计{{totglee}}</p>
+    </div>
+
+
+    <script src="js\vue (1).js"></script>
+<script>
+let vm = new Vue({
+    el:'#app',
+    data:{
+          arr:[
+{
+    name:'mi3',
+    price:'19999',
+    num:10
+
+},{
+    name:'apple x',
+    price:'99999',
+    num:5
+}
+
+          ],
+          totgle:'',
+         
+          firsrname:'bill ',
+          lastname:'gates'
+    },
+    computed: {
+        totglee:function() {
+        //  return   totgle=(this.arr[0].price*this.arr[0].num)+(this.arr[1].price*this.arr[1].num)
+       let price=0;
+       this.arr.forEach(element => {
+          price +=element.price*element.num
+           
+       });
+    return price;
+    
+    },
+    fullname:{
+        get:function() {
+            // getter
+            return this.firsrname +' '+this.lastname
+        },
+        set:function(newval){
+        let names =newval.spilt(' ');
+        this.firstname=names[0];
+        this.lastname=names[1]
+        }
+    }
+    },
+})
+</script>
+ 
+</body>
+</html>

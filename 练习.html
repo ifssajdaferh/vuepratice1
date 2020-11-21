@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+#app{
+    width: 400px;
+    height: 600px;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin: 0 auto;
+
+}
+.chatlogs{
+    padding: 10px;
+height: 400px;
+    overflow: auto;
+
+}
+.edit{
+    height: 200px;
+    border-top: 1px solid cyan;
+    position: relative;
+}
+.info{
+    border: none;
+    outline: none;
+    display: block;
+    width: 390px;
+    margin-left: 5px;
+    margin-top: 5px;
+    height: 40px;
+    max-height: 160px;
+    overflow: auto;
+}
+.btn{
+    border: none;
+    outline: none;
+    display: block;
+    width: 70px;
+    height: 30px;
+    position: absolute;
+    bottom: 25px;
+    right: 5px;
+    background-color: #56a5f1;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+
+}
+.btn-b{
+
+    right: 80px;
+}
+.my{
+    text-align: right;
+}
+.other{
+    color: red;
+}
+
+    </style>
+</head>
+
+<body>
+
+    
+    <div class="" id="app">
+
+<div class="chatlogs">
+<p v-for="msg in msgs" :class="{my:msg.role =='a',other:msg.role=='b'}">{{msg.content}}</p>
+<!-- 角色为a选择myclass，角色为b选择otherclass -->
+</div>
+
+
+
+<div class="edit">
+<input type="text" class="info" v-model="info">
+<button class="btn" @click="sendmsg('a')">send a</button>
+<button class="btn btn-b" @click="sendmsg('b')">send b</button>
+
+<!-- 这里发的信息要确定是a还是b-函数参数.  因为a和b是两种不同的css样式导向，让那个导向选择判断 -->
+</div>
+
+
+
+    </div>
+
+    <script src="js\vue (1).js"></script>
+    <script>
+
+
+// arguments对象，是函数的两个默认隐式参数，这个对象是一个数组结构 伪数组 类数组，但没有数组的方法。它包括了所有函数的参数，意义与
+// 剩余参数很像-重载或是形参的判断。另一个函数的隐式参数就是剩余参数，在形参列表最后一项形参项前加...定义  这个就是一个数组，有完整的数组的
+// 特性
+(function change(abc,b=abc+1){
+                console.log(arguments[1]+arguments.length);
+            })(15,30);
+
+                let a=15;
+                // let有作用域的清晰特点，不会像var一样造成变量越狱情况 进而造成变量污染
+                const b =52;
+                // 剩余参数------由形参传值
+
+
+  (function chan(a,...n){
+  
+    n.forEach(element => {
+    console.log(element);
+    });
+
+})(52,15,15+15,a,a == 2? 3:1);
+
+// 回调函数：即代码回来调用-利用定时器，ajax，还有两种   特点就是 自定义，自调用
+//   箭头函数
+参数 => 表达式或者代码块
+var c=a => { 
+
+}
+// 参数可省略
+var h =()=>{
+
+}
+
+// 箭头后面可以是表达式 而不是强制的{}括起来的代码块
+var n = al=> 5 > 5 ? al=4:al=2
+console.log(n(5));
+// 形参实参 参数项可以不对等  实参项大与形参项=>按顺序赋值，多出来的不管   反之情况 多出来的赋值为undefind
+var t=function(o,p){
+    var nm="函数是一等人民，是一个对象，有自己属性方法";
+
+return o +p
+}
+   
+
+// 函数赋值给变量的调用
+console.log(t(25,99,52)
+
+);
+
+
+// 自动排序函数
+var y=(a,...b) => {
+
+b.push(a);
+
+ return b.sort()
+
+// 第一反应是比较a和b，往里边push进去确实是个最优解，为什摸会给出这种解法那？
+// 别想当然的第一反应 经验思维 直接选择发展     ，应代入理论 概念 认知 对象的 基础的 去进行思路 线路 导向选择
+
+
+}
+console.log(y(56,1,25,36,25,23));
+
+var k=2;
+var t=9;
+console.log(k+t);
+
+
+
+
+
+
+
+
+
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                info:'',
+
+                msgs:[
+                     {
+                         content:'hello ereryone',
+                         role:'a'
+                     },
+                     {
+                         content:'你好啊',
+                         role:'b'
+                     }
+
+                ]
+
+            },
+            watch: {
+             
+            },
+            methods: {
+sendmsg(roles){
+    // data的info和v的input是绑定的，这里的处理 获取input的info值只要更新data的信息即可
+
+  let msg={
+                         content:this.info,
+                         role:roles
+                        //  角色通过形参传过来，content通过 data的与input绑定好的info传过来
+                     };
+                     
+
+
+                  this.msgs.push(msg);
+
+                  this.info=''
+
+
+
+
+
+
+
+
+
+}
+            }
+
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+
+    <div class="" id="app">
+
+
+<pre>
+数组项内content的改变，和数组length改变 不会监听，也不会双向绑定
+    vue对数组监听缺陷的处理方法：1:splice(index,length,newvalue)/splice(newlength)
+                            2:this.$set/vue.set(arr,index,newvalue)
+
+<hr>
+
+遍历对象   v-for=“（值，键，下标）”
+对象的新增删除监听不到{
+1：新增对象属性
+2：删除对象的属性
+方案：新增：vm.$set(vm.obj1,'num1',150) / vue.set(vm.obj1,'num1',150)
+           删除:vue.delete(vm.obj1,'name')
+}
+
+不一样的定义方法  "",这也算个赋值符号，尤其在括号，变量形式要求的输入域内
+
+</pre>
+
+    </div>
+
+    <script src="js\vue (1).js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+               arr:[1,2,3,3,4],
+arr2:[
+    {
+        name:'daadwad',
+        price:'5656'
+    },
+    {
+        name:'hyhyhy',
+        price:'56456'
+    },
+    {
+        name:'djkikad',
+        price:'565yt6'
+    },
+]
+
+            },
+
+            methods: {
+
+            }
+
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>

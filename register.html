@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .login-content {
+            width: 360px;
+            margin: 0 auto;
+            border: 1px solid cyan;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .item {
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .item label {
+            display: inline-block;
+            width: 68px;
+            text-align: right;
+        }
+
+        .item input {
+            border-bottom: 1px solid black;
+            border-right: 1px solid transparent;
+            border-left: 1px solid transparent;
+            border-top: 1px solid transparent;
+            outline: none;
+            color: green;
+        }
+
+        .btn {
+            width: 100px;
+            height: 40px;
+            background-color: cyan;
+            border-radius: 6px;
+            /* border:none; */
+            outline: none;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 50px;
+
+        }
+
+        .error {
+            color: red;
+            position: absolute;
+            bottom: -21px;
+            left: 132px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="" id="app">
+        <div class="login-content">
+            <h1>欢迎注册</h1>
+
+            <div class="item">
+                <label for="">手机号:</label>
+                <input type="text" v-model="phone" v-on:blur="checkphone" autofocus>
+                <span class="error">{{phoneerr}}</span>
+            </div>
+            <div class="item">
+                <label for="">输入密码:</label>
+                <input type="password" v-model="pwd" v-on:blur="checkpwd">
+                <span class="error">{{pwderr}}</span>
+            </div>
+
+            <div class="item">
+                <label for="">确认密码:</label>
+                <input type="password" v-model="pwd1" v-on:blur="checkpwd1">
+                <span class="error">{{pwd1err}}</span>
+            </div>
+
+            <div class="item">
+                <button class="btn" @click="register">注册</button>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+    <script src="js\vue (1).js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                phone: '',
+                pwd: '',
+                phoneerr: ' ',
+                pwderr: ' ',
+                pwd1: '',
+                pwd1err: '',
+                userarr: []
+            },
+            methods: {
+                register() {
+                    //存入本地数据库localstorage
+                    //if语句保证前面的节点输出正确
+                    if (this.phoneerr == '' && this.pwderr == '' && this.pwd1err == '') {
+                        let userinfo = {
+                            phone: this.phone,
+                            pwd: this.pwd
+                        }
+
+
+                        //根据localstorage的值（这个值有时候会是null-因为一些隐私..规则），给userarr赋值，代码层面就是判断语句保证他是数组---算是兼顾性的处理
+
+                        if (localStorage.getItem('userinfo')) {
+                            userarr = JSON.parse(localStorage.getItem('userinfo'));
+
+                        } else {
+                            // 是null的情况下不能null值进去
+                            userarr = []
+                        }
+                       
+                        userarr.push(userinfo);
+
+                        localStorage.setItem('userinfo', JSON.stringify(userarr));
+                        // 代码的userinfo>userarr>localStorage的userinfo
+                          location.href='login.html';
+
+                    }
+                },
+                checkphone() {
+                    // 检查手机号格式
+                    if (!((/^1\d{10}$/.test(this.phone)))) {
+                        this.phoneerr = "手机号格式有误";
+                    } else {
+                        this.phoneerr = '';
+                        // 检查手机号是否已被注册，需后端支持，以jq为例
+
+                        // $.aiax({
+                        //     val:'xxxxxx',
+                        //     type: 'post',
+                        //     data :{
+                        //         phone : 'xxxxx',
+                        //         xxxx: xxxx
+                        //     },
+                        //     success: function() {
+
+                        //     }
+                        // })
+                    }
+
+
+
+                },
+                checkpwd() {
+
+                    // 检查密码格式
+                    if (this.pwd == '') {
+                        this.pwderr = '请输入密码';
+                    } else if (this.pwd.length < 6) {
+                    this.pwderr = '密码格式有误';
+                    } else { this.pwderr = ''; }
+
+
+                    // if(this.pwd1 && this.pwd1 == this.pwd){
+                    //                     this.pwd1err='';
+                    //                    }else{
+                    //                     this.pwd1err='请确保输入一致';
+                    //                    }
+                },
+                checkpwd1() {
+                    if (this.pwd1 && this.pwd1 == this.pwd) {
+                        this.pwd1err = '';
+                    } else {
+                        this.pwd1err = '请确保输入一致';
+                    }
+                }
+            },
+        })
+
+
+    </script>
+</body>
+
+</html>
